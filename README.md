@@ -1,4 +1,6 @@
-![VisionArt](./docs/cover_img.png)
+<p align="center">
+  <img src="./docs/cover_img.png" alt="drawing" width="500"/>
+</p>
 
 ---
 
