@@ -35,7 +35,7 @@ running scripts from this repository. It is recommended to encapsulate the whole
 dark enclosure in order to avoid for external light sources corrupting the recordings. The host pc should be left
 outside the enclosure, for external control by an operator.
 
-The recording process should consist of 5 main phases:
+The recording process should consist of 6 main phases:
 1) calibration of both the sensor's optics (calib-2D) and of the camera-monitor system (calib-3D)
 2) generation of FEM sequences
 3) data recording
