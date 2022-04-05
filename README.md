@@ -63,21 +63,4 @@ beginning of the python file for more detailed instructions.
 If you find this package helpful, please consider citing:
 
 ```BibTex
-@software{lenz_gregor_2021_5079802,
-  author       = {Lenz, Gregor and
-                  Chaney, Kenneth and
-                  Shrestha, Sumit Bam and
-                  Oubari, Omar and
-                  Picaud, Serge and
-                  Zarrella, Guido},
-  title        = {Tonic: event-based datasets and transformations.},
-  month        = jul,
-  year         = 2021,
-  note         = {{Documentation available under 
-                   https://tonic.readthedocs.io}},
-  publisher    = {Zenodo},
-  version      = {0.4.0},
-  doi          = {10.5281/zenodo.5079802},
-  url          = {https://doi.org/10.5281/zenodo.5079802}
-}
 ```
