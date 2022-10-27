@@ -1,0 +1,12 @@
+pyserial
+numpy
+pyaer
+opencv-python
+matplotlib
+pandas
+scipy
+tqdm
+pyyaml
+scikit-build
+tensorflow
+tensorflow-datasets
