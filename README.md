@@ -4,7 +4,7 @@
 
 ---
 
-**_VisionArt_**  stands for: "_VIewing Static Images On Neuromorphic Artificial Retinas with Tremors_".
+**_MovNEye_**  stands for: "_VIewing Static Images On Neuromorphic Artificial Retinas with Tremors_".
 It is a tool to facilitate the neuromorphic community in the exhausting task for converting static image-classification
 datasets to their event-based counterparts. It requires a neuromorphic vision camera (DAVIS, dynamic and active vision 
 sensor) mounted on top of 2 servo-motors (PTU, pant-tilt unit), driven by taking inspiration from natural viewing during
