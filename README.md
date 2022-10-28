@@ -57,7 +57,7 @@ of researchers dealing with similar problems as mine, even though with a slightl
 
 ## Hardware requirements
 - neuromorphic vision sensor DAVIS-346 from IniVation SpA
-- pan-tilt unit device PTU-E46 from FLIR SpA
+- pan-tilt unit PTU-E46 from FLIR Commercial Systems Inc
 
 ## Software requirements
 - python >= 3.6
