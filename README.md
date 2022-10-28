@@ -1,15 +1,15 @@
 <p align="center">
-  <img src="./cover.png" alt="logo" width="500"/>
+  <img src="./cover.svg" alt="logo" width="500"/>
 </p>
 
 ---
 
 **_MovNEye_**  stands for "_Moving a Neuromorphic Eye_".
-It is a toolkit to facilitate the neuromorphic community in the exhausting task of converting static computer-vision
-datasets to their event-based counterparts. It requires a neuromorphic vision sensor (DAVIS, dynamic and active vision 
-sensor) mounted on top of two servo-motors (PTU, pant-tilt unit) driven by taking inspiration from natural dynamic viewing
+It is a tool to facilitate the neuromorphic community in the exhausting task of converting static computer-vision
+datasets to their event-based counterparts. It requires a neuromorphic vision camera (DAVIS, dynamic and active vision 
+sensor) mounted on top of two servo-motors (PTU, pant-tilt unit), driven by taking inspiration from natural viewing
 during fixation (FEMs, fixational eye movements). The system converts static images into spike trains by exploiting a 
-silicon retina and human's active fixational strategies (specifically, a microscopic and randomly-drifting motion pattern).
+silicon retina and human's dynamic fixational strategies (specifically, a microscopic and randomly-drifting motion pattern).
 
 ---
 ## Motivation
@@ -80,7 +80,7 @@ dark enclosure in order to avoid for external light sources corrupting the recor
 outside the enclosure, for external control by an operator.
 
 The recording process should consist of 6 main phases:
-1) calibration both of the sensor optics (calib-2D) and of the camera-monitor system (calib-3D)
+1) calibration both of the sensor optics (calib-2D) and homography of the camera-monitor system (calib-3D)
 2) generation of FEM sequences
 3) data recording
 4) data diagnostics, analysis and errors correction
