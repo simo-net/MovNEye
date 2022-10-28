@@ -1,23 +1,20 @@
-Clone VisionArt from github:
-git clone https://github.com/simo-net/VisionArt /path/to/VisionArt
-(e.g.: git clone https://github.com/simo-net/VisionArt ~/PycharmProjects/VisionArt)
+Clone MovNEye from github:
+git clone https://github.com/simo-net/MovNEye /path/to/MovNEye
 
-Navigate to the directory where you want to create the project that should use VisionArt:
+Navigate to the directory where you want to create the project that should use MovNEye:
 cd ~/PycharmProjects/MyProject
 
 Create virtual environment:
-python3 -m venv ./visionartenv
+python3 -m venv ./movneyenv
 
 Activate virtual environment:
-source ./visionartenv/bin/activate
+source ./movneyenv/bin/activate
 
-Install the VisionArt repository (with its dependencies) in the virtual environment (note that -e flag stands for editable, use it if you want to easily edit VisionArt):
-python3 -m pip install -e /path/to/VisionArt
-(e.g.: python3 -m pip install -e ~/PycharmProjects/VisionArt)
+Install the VisionArt repository (with its dependencies) in the virtual environment (note that -e flag stands for editable, use it if you want to easily edit MovNEye):
+python3 -m pip install -e /path/to/MovNEye
 
 Now you are ready to go!
-Start by generating some FEM sequences, then calibrate your camera and camera-monitor system and finally record some data.
+Start by generating some FEM sequences, then calibrate your camera and camera-monitor system, and finally record some data.
 
 When you are done, deactivate the virtual environment:
 deactivate
-
