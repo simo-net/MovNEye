@@ -4,12 +4,12 @@
 
 ---
 
-**_MovNEye_**  stands for: "_Moving a Neuromorphic Eye_".
-It is a tool to facilitate the neuromorphic community in the exhausting task of converting static computer-vision
-datasets to their event-based counterparts. It requires a neuromorphic vision camera (DAVIS, dynamic and active vision 
-sensor) mounted on top of two servo-motors (PTU, pant-tilt unit), driven by taking inspiration from natural viewing
+**_MovNEye_**  stands for "_Moving a Neuromorphic Eye_".
+It is a toolkit to facilitate the neuromorphic community in the exhausting task of converting static computer-vision
+datasets to their event-based counterparts. It requires a neuromorphic vision sensor (DAVIS, dynamic and active vision 
+sensor) mounted on top of two servo-motors (PTU, pant-tilt unit) driven by taking inspiration from natural dynamic viewing
 during fixation (FEMs, fixational eye movements). The system converts static images into spike trains by exploiting a 
-silicon retina and human's dynamic fixational strategies (specifically, a microscopic and randomly-drifting motion pattern).
+silicon retina and human's active fixational strategies (specifically, a microscopic and randomly-drifting motion pattern).
 
 ---
 ## Motivation
