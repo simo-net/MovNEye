@@ -85,9 +85,9 @@ The recording process should consist of 6 main phases:
 
 ### Software
 - python >= 3.6
+- pyaer (follow installation instructions provided [here](https://github.com/duguyue100/pyaer))
 - pyserial
 - numpy
-- pyaer
 - opencv-python
 - tensorflow-datasets
 - matplotlib
