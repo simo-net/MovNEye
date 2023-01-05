@@ -15,6 +15,4 @@ python3 -m pip install -e /path/to/MovNEye
 
 Now you are ready to go!
 Start by generating some FEM sequences, then calibrate your camera and camera-monitor system, and finally record some data.
-
-When you are done, deactivate the virtual environment:
-deactivate
+When you are done, deactivate the virtual environment.

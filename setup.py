@@ -10,7 +10,7 @@ setuptools.setup(
     name="MovNEye",
     version="0.1",
     author="Simone Testa",
-    author_email="simonetesta994@gmail.com",
+    author_email="simone.testa@edu.unige.it",
     description="Converting static images to event-based data using an active neuromorphic vision setup guided by bio-inspired Fixational Eye Movements.",
     long_description=long_description,
     long_description_content_type="text/markdown",
