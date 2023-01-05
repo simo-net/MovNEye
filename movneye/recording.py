@@ -345,7 +345,7 @@ class RecordScene:
                               64)
         self.davis.set_config(libcaer.CAER_HOST_CONFIG_PACKETS,
                               libcaer.CAER_HOST_CONFIG_PACKETS_MAX_CONTAINER_PACKET_SIZE,
-                              max_packet_size)  # TODO: try different configurations
+                              max_packet_size)
         self.davis.set_config(libcaer.CAER_HOST_CONFIG_PACKETS,
                               libcaer.CAER_HOST_CONFIG_PACKETS_MAX_CONTAINER_INTERVAL,
                               int(max_packet_interval * 1e3))  # set it high not to produce too many packets/second
@@ -801,9 +801,9 @@ class RecordScene:
                             dvs_pack, n_dvs_pack = self.davis.get_polarity_event(
                                 packet_header, self._noise_filter
                             )
-                            # if self._noise_filter:  # TODO: put the noise filtering AFTER the recording loop
-                            #     dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
-                            #     n_dvs_pack = dvs_pack.shape[0]
+                            if self._noise_filter:
+                                dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
+                                n_dvs_pack = dvs_pack.shape[0]
                             np.savetxt(txt_dvs, dvs_pack, fmt=format_dvs_data, newline="\n")
                             if tot_num_dvs_events == 0 and n_dvs_pack > 0:
                                 first_dvs = dvs_pack[0, 0]
@@ -892,9 +892,9 @@ class RecordScene:
                         packet_header, packet_type = self.davis.get_packet_header(packet_container, packet_id)
                         if packet_type == libcaer.POLARITY_EVENT:
                             dvs_pack, n_dvs_pack = self.davis.get_polarity_event(packet_header, self._noise_filter)
-                            # if self._noise_filter:  # TODO: put the noise filtering AFTER the recording loop
-                            #     dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
-                            #     n_dvs_pack = dvs_pack.shape[0]
+                            if self._noise_filter:
+                                dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
+                                n_dvs_pack = dvs_pack.shape[0]
                             np.savetxt(txt_dvs, dvs_pack, fmt=format_dvs_data, newline="\n")
                             if tot_num_dvs_events == 0 and n_dvs_pack > 0:
                                 first_dvs = dvs_pack[0, 0]
@@ -1010,9 +1010,9 @@ class RecordScene:
                             dvs_pack, n_dvs_pack = self.davis.get_polarity_event(
                                 packet_header, self._noise_filter
                             )
-                            # if self._noise_filter:  # TODO: put the noise filtering AFTER the recording loop
-                            #     dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
-                            #     n_dvs_pack = dvs_pack.shape[0]
+                            if self._noise_filter:
+                                dvs_pack = dvs_pack[dvs_pack[:, 4] == 1][:, :-1]
+                                n_dvs_pack = dvs_pack.shape[0]
                             np.savetxt(txt_dvs, dvs_pack, fmt=format_dvs_data, newline="\n")
                             if tot_num_dvs_events == 0 and n_dvs_pack > 0:
                                 first_dvs = dvs_pack[0, 0]

@@ -3,11 +3,12 @@ import time
 import serial
 import serial.tools.list_ports
 
-"""A FLIR PTU E-series remote controller through serial communication.
-Note: Serial wired connection between PTU and host computer is required."""
-
 
 class PTU(object):
+    """
+    A FLIR PTU E-series remote controller through serial communication.
+    Note: Serial wired connection between PTU and host computer is required.
+    """
 
     def __init__(self, port: int, baud: int = 9600, timeout: float = 6, steps: (str, str) = ('H', 'H'),
                  verbose: bool = True):

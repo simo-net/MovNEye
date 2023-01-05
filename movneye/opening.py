@@ -165,47 +165,34 @@ def load_dvs(dvsfile: str,  # Select the DVS recording
             dvs_handler.show_time_difference(bin_size=bin_size*1e3)
             dvs_handler.show_view3D_onoff(duration=200*1e3)  # JUST SHOW THE FIRST 200ms (or plot will be too heavy)
 
-            # dvsvid_on, dvsvid_off = dvs_handler.video_onoff(duration=200*1e3, bin_size=bin_size*1e3, smooth=False)
-            # dvsvid = np.zeros((*dvsvid_on.shape, 3))  # BGR video
-            # minval, maxval = min(dvsvid_on.min(), dvsvid_off.min()), max(dvsvid_on.max(), dvsvid_off.max())
-            # dvsvid[..., 0] = np.uint8(np.interp(dvsvid_off, (minval, maxval), (0, 255)))  # red = OFF
-            # dvsvid[..., 1] = np.uint8(np.interp(dvsvid_on, (minval, maxval), (0, 255)))  # green = ON
-            # del dvsvid_on, dvsvid_off
-            #
-            # for frame in dvsvid:
-            #     plt.figure()
-            #     plt.imshow(frame)
-            #     plt.show()
-
         if verbose:
             print('\n')
 
         return dvs_handler
 
 
-# TODO: new function!!!!
-def load_dvs_final(dvsfile: str, shape: (int, int) = (34, 34),
-                   bin_size: float = 1, plot: bool = True, verbose: bool = True):
-
-    if verbose:
-        print('\nLoading DVS recording...')
-
-    # Pre-process DVS events
-    with dvs.handler(reset_timestamps=False) as dvs_handler:
-        dvs_handler.load_file(dvsfile, shape=shape, rows4header=0, shape_from_header=False)
-        if verbose:
-            print(f'   - Duration is: ~{int(round(dvs_handler.duration * 1e-3))} ms\n'
-                  f'   - Number of DVS events: {dvs_handler.num_events}\n'
-                  f'   - Mean firing rate is: {round(dvs_handler.mean_firing_rate(), 2)} Hz\n'
-                  f'   - Fraction of ON/OFF events is: {tuple([round(f, 2) for f in dvs_handler.fraction_onoff()])}\n')
-        if plot:
-            dvs_handler.show_rasterplot(show=True)
-            dvs_handler.show_video_onoff_bluewhite(bin_size=bin_size*1e3)
-            dvs_handler.show_surface_active_events(bin_size=bin_size*1e3)
-            dvs_handler.show_time_difference(bin_size=bin_size*1e3)
-            dvs_handler.show_view3D_onoff(duration=200*1e3)  # JUST SHOW THE FIRST 200ms (or plot will be too heavy)
-
-        return dvs_handler
+# def load_dvs_processed(dvsfile: str, shape: (int, int) = (34, 34),
+#                        bin_size: float = 1, plot: bool = True, verbose: bool = True):
+#
+#     if verbose:
+#         print('\nLoading DVS recording...')
+#
+#     # Pre-process DVS events
+#     with dvs.handler(reset_timestamps=False) as dvs_handler:
+#         dvs_handler.load_file(dvsfile, shape=shape, rows4header=0, shape_from_header=False)
+#         if verbose:
+#             print(f'   - Duration is: ~{int(round(dvs_handler.duration * 1e-3))} ms\n'
+#                   f'   - Number of DVS events: {dvs_handler.num_events}\n'
+#                   f'   - Mean firing rate is: {round(dvs_handler.mean_firing_rate(), 2)} Hz\n'
+#                   f'   - Fraction of ON/OFF events is: {tuple([round(f, 2) for f in dvs_handler.fraction_onoff()])}\n')
+#         if plot:
+#             dvs_handler.show_rasterplot(show=True)
+#             dvs_handler.show_video_onoff_bluewhite(bin_size=bin_size*1e3)
+#             dvs_handler.show_surface_active_events(bin_size=bin_size*1e3)
+#             dvs_handler.show_time_difference(bin_size=bin_size*1e3)
+#             dvs_handler.show_view3D_onoff(duration=200*1e3)  # JUST SHOW THE FIRST 200ms (or plot will be too heavy)
+#
+#         return dvs_handler
 
 
 def plot_speedONrasterplot(dvs_ts: np.ndarray, dvs_id: np.ndarray, dvs_pol: np.ndarray,
@@ -406,22 +393,19 @@ def load_dataset_recording(file2load: str,  # Select the recording
                      imufile=imu_file,
                      verbose=verbose, plot=plot)
 
-    # View the DVS recording
-    if dvs_file is not None:
-        dvs_handler = load_dvs(dvsfile=dvs_file,
-                               cut_in_fem=cut_fem, calib_file=calib_file, roi=roi,
-                               refractory=refractory, hotpix_space_window=hotpix_space_window,
-                               burnin=rec_burnin, burnout=rec_burnout,
-                               imufile=imu_file,
-                               bin_size=bin_size,
-                               verbose=verbose, plot=plot)
-
     # View the corresponding stimulus (dataset sample)
     if dataset_type is not None and img_split is not None and img_id is not None:
         img = load_img_dataset(dataset_type, split=img_split, index=img_id, transforms=img_transforms,
                                verbose=verbose, plot=False)
 
         if plot and dvs_file is not None:
+            dvs_handler = load_dvs(dvsfile=dvs_file,
+                                   cut_in_fem=cut_fem, calib_file=calib_file, roi=roi,
+                                   refractory=refractory, hotpix_space_window=hotpix_space_window,
+                                   burnin=rec_burnin, burnout=rec_burnout,
+                                   imufile=imu_file,
+                                   bin_size=bin_size,
+                                   verbose=verbose, plot=plot)
             ifr_on, ifr_off = dvs_handler.video_onoff(bin_size=200 * 1e3)
             img_dvs = (ifr_on[0] - ifr_off[0])
 
@@ -441,42 +425,41 @@ def load_dataset_recording(file2load: str,  # Select the recording
                      verbose=verbose, plot=plot)
 
 
-# TODO: new function!!!!
-def load_preprocessed_recording(file2load: str, shape: (int, int) = (34, 34), bin_size: float = 10,
-                                verbose: bool = True, plot: bool = True):
-    # Recordings
-    _, dvs_file, _, err_file = recording_info(file2load)
-    if err_file is not None:
-        manage_recording_issue(err_file)
-    # Movement
-    fem_file, fem_seed = movement_info(file2load)
-    # Stimulus
-    _, img_id, img_label, img_split, dataset_type, img_transforms = stimulus_info(file2load)
-
-    # View the movement (FEM sequence)
-    if fem_file is not None:
-        _ = load_fem(fem_file,
-                     verbose=verbose, plot=plot)
-
-    # View the DVS recording
-    dvs_handler = load_dvs_final(dvs_file, shape=shape, bin_size=bin_size, plot=True, verbose=True)
-
-    # View the stimulus (dataset sample)
-    img = load_img_dataset(dataset_type, split=img_split, index=img_id, transforms=img_transforms,
-                           verbose=verbose, plot=plot)
-
-    # View them together
-    ifr_on, ifr_off = dvs_handler.video_onoff(bin_size=1 * 1e3)
-    img_dvs = (ifr_on[0] - ifr_off[0])
-    fig, axs = plt.subplots(nrows=1, ncols=2)
-    plt.suptitle(f'{dataset_type.upper()} sample {img_id} from the {img_split.upper()} set - label {img_label}')
-    axs[0].set_title(f'DVS recording {img_dvs.shape}\nmotion seed {fem_seed}')
-    axs[0].imshow(img_dvs, cmap='gray')
-    axs[0].axis('off')
-    axs[1].set_title(f'Original image {img.shape[:2]}\nstatic display')
-    axs[1].imshow(img, cmap=None if (len(img.shape) == 3 and img.shape[2] == 3) else 'gray')
-    axs[1].axis('off')
-    plt.show()
+# def load_preprocessed_recording(file2load: str, shape: (int, int) = (34, 34), bin_size: float = 10,
+#                                 verbose: bool = True, plot: bool = True):
+#     # Recordings
+#     _, dvs_file, _, err_file = recording_info(file2load)
+#     if err_file is not None:
+#         manage_recording_issue(err_file)
+#     # Movement
+#     fem_file, fem_seed = movement_info(file2load)
+#     # Stimulus
+#     _, img_id, img_label, img_split, dataset_type, img_transforms = stimulus_info(file2load)
+#
+#     # View the movement (FEM sequence)
+#     if fem_file is not None:
+#         _ = load_fem(fem_file,
+#                      verbose=verbose, plot=plot)
+#
+#     # View the DVS recording
+#     dvs_handler = load_dvs_processed(dvs_file, shape=shape, bin_size=bin_size, plot=True, verbose=True)
+#
+#     # View the stimulus (dataset sample)
+#     img = load_img_dataset(dataset_type, split=img_split, index=img_id, transforms=img_transforms,
+#                            verbose=verbose, plot=plot)
+#
+#     # View them together
+#     ifr_on, ifr_off = dvs_handler.video_onoff(bin_size=1 * 1e3)
+#     img_dvs = (ifr_on[0] - ifr_off[0])
+#     fig, axs = plt.subplots(nrows=1, ncols=2)
+#     plt.suptitle(f'{dataset_type.upper()} sample {img_id} from the {img_split.upper()} set - label {img_label}')
+#     axs[0].set_title(f'DVS recording {img_dvs.shape}\nmotion seed {fem_seed}')
+#     axs[0].imshow(img_dvs, cmap='gray')
+#     axs[0].axis('off')
+#     axs[1].set_title(f'Original image {img.shape[:2]}\nstatic display')
+#     axs[1].imshow(img, cmap=None if (len(img.shape) == 3 and img.shape[2] == 3) else 'gray')
+#     axs[1].axis('off')
+#     plt.show()
 
 
 def manage_recording_issue(errfile: str):

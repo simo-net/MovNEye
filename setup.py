@@ -17,7 +17,7 @@ setuptools.setup(
     url="https://github.com/simo-net/MovNEye",
     include_package_data=False,
     packages=setuptools.find_packages(),
-    setup_requires=["pyyaml", "scikit-build", "tensorflow"],
+    setup_requires=["pyyaml", "scikit-build"],
     install_requires=required,
     classifiers=[
         "Programming Language :: Python :: 3",

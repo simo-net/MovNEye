@@ -8,5 +8,4 @@ scipy
 tqdm
 pyyaml
 scikit-build
-tensorflow
 tensorflow-datasets
